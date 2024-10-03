@@ -1,6 +1,5 @@
-// returns a resolved promise with an object
 export default function signUpUser(firstName, lastName) {
-    return new Promise((resolve) => {
-        resolve({ firstName: firstName, lastName: lastName });
-    })
+  return new Promise((resolve) => {
+    resolve({ firstName, lastName });
+  });
 }
