@@ -23,7 +23,7 @@ class HolbertonCourse {
 
   // name setter
   set name(newName) {
-    if (typeof x === 'string') {
+    if (typeof newName === 'string') {
       this._name = newName;
     } else {
       throw TypeError('Name must be an string');
