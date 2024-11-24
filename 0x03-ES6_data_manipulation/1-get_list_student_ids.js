@@ -1,9 +1,9 @@
 export default function getListStudentIds(objArray) {
+  const map = new Map();
+ 
   if (!Array.isArray(objArray)) {
     return [];
   }
-
-  const map = new Map();
 
   for (let i = 0; i < objArray.length; i += 1) {
     map.set(i, objArray[i].id);
