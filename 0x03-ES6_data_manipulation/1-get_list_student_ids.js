@@ -1,6 +1,6 @@
 export default function getListStudentIds(objArray) {
   const map = new Map();
- 
+
   if (!Array.isArray(objArray)) {
     return [];
   }
