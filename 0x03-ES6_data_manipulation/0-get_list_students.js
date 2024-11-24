@@ -1,5 +1,5 @@
 export default function getListStudents() {
-  return [
+  const students = [
     {
       id: 1,
       firstName: 'Guillaume',
@@ -16,4 +16,12 @@ export default function getListStudents() {
       location: 'San Francisco',
     },
   ];
+
+  const map = new Map();
+
+  for (let i = 0; i < students.length; i += 1) {
+    map.set(i, students[i]);
+  }
+
+  return Array.from(map.values());
 }
