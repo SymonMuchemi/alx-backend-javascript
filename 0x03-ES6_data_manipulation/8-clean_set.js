@@ -3,12 +3,12 @@ export default function cleanSet(set, startString) {
     throw new Error('set must be a Set');
   }
 
-  if (startString.length === 0) {
+  if (startString === undefined || typeof startString !== 'string') {
     return '';
   }
 
   const finalStr = [...set]
-    .filter((str) => str.indexOf(startString) !== -1)
+    .filter((str) => typeof str === 'string' && str.includes(startString))
     .map((str) => str.slice(startString.length));
 
   return finalStr.join('-');
