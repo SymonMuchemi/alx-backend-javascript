@@ -7,8 +7,11 @@ const rl = readline.createInterface({
 
 console.log('Welcome to Holberton School, what is your name?');
 
-rl.question('Your name is: ', (answer) => {
-  console.log(`Hello, ${answer}`);
-  console.log('This important software is now closing');
+rl.on('line', (input) => {
+  console.log(`Your name is: ${input}`);
   rl.close();
+});
+
+rl.on('close', () => {
+  console.log('This important software is now closing');
 });
