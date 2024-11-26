@@ -4,7 +4,7 @@ function countStudents(filepath) {
   // read file synchronously
   const studentsData = fs.readFileSync(filepath, 'utf-8');
 
-  if (!studentsData) {
+  if (!studentsData || !filepath) {
     throw new Error('Cannot load the database');
   }
 
