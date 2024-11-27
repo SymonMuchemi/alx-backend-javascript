@@ -3,13 +3,10 @@ import readDatabase from '../utils';
 class StudentsController {
   static async getAllStudents(request, response) {
     try {
-      const lastCommandLineArgumentIndex = process.argv.length - 1;
-      const studentsData = await readDatabase(
-        process.argv[lastCommandLineArgumentIndex],
-      );
+      const studentsData = await readDatabase('./database.csv');
 
       if (studentsData.length === 0) {
-        return response.status(500).send('Cannot load database');
+        return response.status(500).send('Cannot load database: inside');
       }
 
       let message = 'This is the list of students';
@@ -17,15 +14,16 @@ class StudentsController {
       const fields = Object.keys(studentsData).sort((a, b) => a - b);
 
       for (const field of fields) {
-        const list = studentsData.get(field);
-        console.log(list);
+        const list = studentsData[field];
+        // console.log(list);
 
         message += `\nNumber of students in ${field}: ${
-          list.len
+          list.length
         }. List: ${list.join(', ')}`;
       }
       return response.status(200).send(message);
     } catch (error) {
+      // console.log(error.message);
       return response.status(500).send('Cannot load database');
     }
   }
@@ -46,9 +44,8 @@ class StudentsController {
 
       const field = Object.keys(studentsData).filter((f) => f === major);
 
-      const list = studentsData.get(field);
-      console.log(list);
-      message += `\nList: ${list.join(', ')}`;
+      const list = studentsData[field];
+      message += `List: ${list.join(', ')}`;
 
       return response.status(200).send(message);
     } catch (error) {

@@ -20,11 +20,12 @@ async function readDatabase(filepath) {
       const lst = arr.filter(((e) => e.split(',')[3] === field));
       const names = lst.map(((e) => e.split(',')[0]));
 
-      dataObj.Set(field, names);
+      dataObj[field] = names;
     }
 
     return dataObj;
   } catch (error) {
+    // console.log(error.message);
     throw new Error('Cannot load the database');
   }
 }
