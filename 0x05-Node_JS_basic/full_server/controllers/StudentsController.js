@@ -3,7 +3,8 @@ import readDatabase from '../utils';
 class StudentsController {
   static async getAllStudents(request, response) {
     try {
-      const studentsData = await readDatabase('./database.csv');
+      const argLen = process.argv.length;
+      const studentsData = await readDatabase(process.argv[argLen - 1]);
 
       if (studentsData.length === 0) {
         return response.status(500).send('Cannot load database: inside');
