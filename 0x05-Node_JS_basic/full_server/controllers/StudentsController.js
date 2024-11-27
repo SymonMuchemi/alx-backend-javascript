@@ -29,6 +29,32 @@ class StudentsController {
       return response.status(500).send('Cannot load database');
     }
   }
+
+  static async getAllStudentsByMajor(request, response) {
+    try {
+      const { major } = request.params;
+      const lastCommandLineArgumentIndex = process.argv.length - 1;
+      const studentsData = await readDatabase(
+        process.argv[lastCommandLineArgumentIndex],
+      );
+
+      if (studentsData.length === 0) {
+        return response.status(500).send('Cannot load database');
+      }
+
+      let message = '';
+
+      const field = Object.keys(studentsData).filter((f) => f === major);
+
+      const list = studentsData.get(field);
+      console.log(list);
+      message += `\nList: ${list.join(', ')}`;
+
+      return response.status(200).send(message);
+    } catch (error) {
+      return response.status(500).send('Cannot load database');
+    }
+  }
 }
 
 module.exports = StudentsController;
