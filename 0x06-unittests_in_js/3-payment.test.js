@@ -16,7 +16,7 @@ describe('send payment to API module', () => {
 
       expect(consoleSpy.calledOnce).to.be.true;
 
-      expect(consoleSpy.calledWith('The toal is: 20')).to.be.true;
+      expect(consoleSpy.calledWith('The total is: 20')).to.be.true;
 
       consoleSpy.restore();
     });
@@ -28,7 +28,7 @@ describe('send payment to API module', () => {
 
       expect(consoleSpy.calledOnce).to.be.true;
 
-      expect(consoleSpy.calledWith('The toal is: 0')).to.be.true;
+      expect(consoleSpy.calledWith('The total is: 0')).to.be.true;
 
       consoleSpy.restore();
     });
@@ -40,7 +40,7 @@ describe('send payment to API module', () => {
 
       expect(consoleSpy.calledOnce).to.be.true;
 
-      expect(consoleSpy.calledWith('The toal is: 13')).to.be.true;
+      expect(consoleSpy.calledWith('The total is: 13')).to.be.true;
 
       consoleSpy.restore();
     });
@@ -52,7 +52,7 @@ describe('send payment to API module', () => {
 
       expect(consoleSpy.calledOnce).to.be.true;
 
-      expect(consoleSpy.calledWith('The toal is: 1')).to.be.true;
+      expect(consoleSpy.calledWith('The total is: 1')).to.be.true;
 
       consoleSpy.restore();
     });
@@ -64,7 +64,7 @@ describe('send payment to API module', () => {
 
       expect(consoleSpy.calledOnce).to.be.true;
 
-      expect(consoleSpy.calledWith('The toal is: NaN')).to.be.true;
+      expect(consoleSpy.calledWith('The total is: NaN')).to.be.true;
 
       consoleSpy.restore();
     });
@@ -79,6 +79,21 @@ describe('send payment to API module', () => {
       expect(funcSpy.calculateNumber.callCount).to.be.equal(1);
 
       funcSpy.calculateNumber.restore();
+    });
+  });
+
+  describe('sendPaymentRequestToAPI', () => {
+    it('uses Utils.calculateNumber for calculation', () => {
+      const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
+      const consoleSpy = sinon.spy(console, 'log');
+
+      sendPaymentRequestToAPI(100, 20);
+
+      expect(calculateNumberSpy.calledOnceWithExactly('SUM', 100, 20)).to.be.true;
+      expect(consoleSpy.calledWith('The total is: 120')).to.be.true;
+
+      calculateNumberSpy.restore();
+      consoleSpy.restore();
     });
   });
 });
