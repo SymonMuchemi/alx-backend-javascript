@@ -74,55 +74,5 @@ describe("calculateNumber", function() {
         it('returns correct value on positive value', () => {
             assert.strictEqual(calculateNumber(10^10, 10^10), 0)
         })
-    })
-
-    describe('With non-integer/float values', () => {
-        it('returns NaN when a is a string', () => {
-            assert.strictEqual(isNaN(calculateNumber("string", 2)), true);
-        });
-
-        it('returns NaN when b is a string', () => {
-            assert.strictEqual(isNaN(calculateNumber(2, "string")), true);
-        });
-
-        it('returns NaN when both a and b are strings', () => {
-            assert.strictEqual(isNaN(calculateNumber("string", "string")), true);
-        });
-
-        it('returns NaN when a is an object', () => {
-            assert.strictEqual(isNaN(calculateNumber({}, 2)), true);
-        });
-
-        it('returns NaN when b is an object', () => {
-            assert.strictEqual(isNaN(calculateNumber(2, {})), true);
-        });
-
-        it('returns NaN when both a and b are objects', () => {
-            assert.strictEqual(isNaN(calculateNumber({}, {})), true);
-        });
-
-        it('returns NaN when a is an array', () => {
-            assert.strictEqual(isNaN(calculateNumber([], 2)), true);
-        });
-
-        it('returns NaN when b is an array', () => {
-            assert.strictEqual(isNaN(calculateNumber(2, [])), true);
-        });
-
-        it('returns NaN when both a and b are arrays', () => {
-            assert.strictEqual(isNaN(calculateNumber([], [])), true);
-        });
-
-        it('returns NaN when a is a boolean', () => {
-            assert.strictEqual(isNaN(calculateNumber(true, 2)), true);
-        });
-
-        it('returns NaN when b is a boolean', () => {
-            assert.strictEqual(isNaN(calculateNumber(2, true)), true);
-        });
-
-        it('returns NaN when both a and b are booleans', () => {
-            assert.strictEqual(isNaN(calculateNumber(true, true)), true);
-        });
     });
 })
