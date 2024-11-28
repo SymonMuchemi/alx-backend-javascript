@@ -6,7 +6,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const sendPaymentRequestToAPI = require('./5-payment');
-const Utils = require('./utils');
 
 describe('test with hooks', () => {
   let consoleSpy;
