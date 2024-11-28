@@ -33,6 +33,30 @@ describe('send payment to API module', () => {
       consoleSpy.restore();
     });
 
+    it('logs correct on floats', () => {
+      const consoleSpy = sinon.spy(console, 'log');
+
+      sendPaymentRequestToAPI(10.5, 2.4);
+
+      expect(consoleSpy.calledOnce).to.be.true;
+
+      expect(consoleSpy.calledWith('The toal is: 13')).to.be.true;
+
+      consoleSpy.restore();
+    });
+
+    it('logs correct on small floats', () => {
+      const consoleSpy = sinon.spy(console, 'log');
+
+      sendPaymentRequestToAPI(0.5, 0.4);
+
+      expect(consoleSpy.calledOnce).to.be.true;
+
+      expect(consoleSpy.calledWith('The toal is: 1')).to.be.true;
+
+      consoleSpy.restore();
+    });
+
     it('logs correct on NaN', () => {
       const consoleSpy = sinon.spy(console, 'log');
 
