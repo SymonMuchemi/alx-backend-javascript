@@ -5,6 +5,7 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 const sendPaymentRequestToAPI = require('./3-payment');
+const Utils = require('./utils');
 
 describe('send payment to API module', () => {
   describe('logged message', () => {
@@ -42,6 +43,18 @@ describe('send payment to API module', () => {
       expect(consoleSpy.calledWith('The toal is: NaN')).to.be.true;
 
       consoleSpy.restore();
+    });
+  });
+  describe('uses the calculate function in utils module', () => {
+    it('uses the calculate function', () => {
+      const funcSpy = sinon.spy(Utils);
+
+      sendPaymentRequestToAPI(10, 10);
+
+      expect(funcSpy.calculateNumber.calledWith('SUM', 10, 10)).to.be.true;
+      expect(funcSpy.calculateNumber.callCount).to.be.equal(1);
+
+      funcSpy.calculateNumber.restore();
     });
   });
 });
