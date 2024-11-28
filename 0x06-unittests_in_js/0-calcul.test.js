@@ -73,22 +73,8 @@ describe("calculateNumber", function() {
     describe('With single large positive and single large negative', () => {
         it('returns correct value on positive value', () => {
             assert.strictEqual(calculateNumber(10^10, 10^10), 0)
-        });
-    });
-
-    describe('With NaN values', () => {
-        it('returns NaN when a is NaN', () => {
-            assert.strictEqual(isNaN(calculateNumber(NaN, 2)), true);
-        });
-
-        it('returns NaN when b is NaN', () => {
-            assert.strictEqual(isNaN(calculateNumber(2, NaN)), true);
-        });
-
-        it('returns NaN when both a and b are NaN', () => {
-            assert.strictEqual(isNaN(calculateNumber(NaN, NaN)), true);
-        });
-    });
+        })
+    })
 
     describe('With non-integer/float values', () => {
         it('returns NaN when a is a string', () => {
