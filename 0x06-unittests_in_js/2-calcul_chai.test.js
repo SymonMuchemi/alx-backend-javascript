@@ -1,7 +1,13 @@
-import { expect } from "chai";
-import { calculateNumber } from "./2-calcul_chai.js";
+const calculateNumber = require('./2-calcul_chai')
 
 describe("Calculate number", () => {
+  let expect;
+  
+  before(async () => {
+      const chai = await import('chai');
+      expect = chai.expect;
+  });
+
   describe("Rounding behaviour on decimal numbers just below and above the rounding threshold", () => {
     it("Summation on positives", () => {
       expect(calculateNumber("SUM", 0.4, 0.5)).to.equal(1);
