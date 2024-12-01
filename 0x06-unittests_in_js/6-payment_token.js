@@ -1,7 +1,7 @@
-function getPaymentTokenFromAPI(success) {
+const getPaymentTokenFromAPI = (success) => new Promise((resolve) => {
   if (success) {
-    return Promise.resolve({ result: 'Amazing result!' });
+    resolve({ data: 'Successful response from the API' });
   }
-}
+});
 
 module.exports = getPaymentTokenFromAPI;
