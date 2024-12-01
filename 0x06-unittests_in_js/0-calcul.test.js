@@ -55,10 +55,10 @@ describe('calculateNumber', () => {
 
   describe('with large values', () => {
     it('returns correct value with a and b as large integers', () => {
-      assert.strictEqual(calculateNumber(10 ** 10, 10 ** 20), 10 ** 20);
+      assert.strictEqual(calculateNumber(10 ** 10, 10 ** 20), 100000000010000000000);
     });
     it('returns correct value with a and b as larger complex integers', () => {
-      assert.strictEqual(calculateNumber(10 ** 10.1, 10 ** 20), 1.00461579 * 10 ** 20);
+      assert.strictEqual(calculateNumber(10 ** 10.1, 10 ** 20), 100000000012589250000);
     });
   });
 
@@ -74,7 +74,7 @@ describe('calculateNumber', () => {
 
   describe('with single large positive and single large negative', () => {
     it('returns correct value on positive value', () => {
-      assert.strictEqual(calculateNumber(10 ** 10, 10 ** 10), 0);
+      assert.strictEqual(calculateNumber(10 ** 10, 10 ** 10), 20000000000);
     });
   });
 });
