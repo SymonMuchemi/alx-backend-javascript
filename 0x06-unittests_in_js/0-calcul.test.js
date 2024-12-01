@@ -12,15 +12,15 @@ describe("calculateNumber", function() {
 
     describe('Rounding behaviour', () => {    
         it('both a and b as floating point numbers', () => {
-            assert.strictEqual(calculateNumber(2.5, 2.3), 6);
+            assert.strictEqual(calculateNumber(2.5, 2.3), 5);
         });
     
         it('with a as non-integer', () => {
-            assert.strictEqual(calculateNumber(6.2, 5), 12);
+            assert.strictEqual(calculateNumber(6.2, 5), 11);
         });
     
         it('with b as non-integer', () => {
-            assert.strictEqual(calculateNumber(5, 2.1), 8);
+            assert.strictEqual(calculateNumber(5, 2.1), 7);
         })
     });
 
@@ -29,10 +29,10 @@ describe("calculateNumber", function() {
             assert.strictEqual(calculateNumber(0, 0), 0);
         })
         it('calculates correctly with a as zeros', () => {
-            assert.strictEqual(calculateNumber(0, 1.3), 2);
+            assert.strictEqual(calculateNumber(0, 1.3), 1);
         })
         it('calculates correctly with b as zeros', () => {
-            assert.strictEqual(calculateNumber(5.2, 0), 6);
+            assert.strictEqual(calculateNumber(5.2, 0), 5);
         })
     });
 
@@ -62,7 +62,7 @@ describe("calculateNumber", function() {
 
     describe('With smaller numbers - close to zero', () => {
         it('returns correct value with small positive values', () => {
-            assert.strictEqual(calculateNumber(0.1, 0.4), 2);
+            assert.strictEqual(calculateNumber(0.1, 0.4), 0);
         });
         
         it('returns correct value with small negative values', () => {
