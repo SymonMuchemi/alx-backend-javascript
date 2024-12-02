@@ -34,7 +34,7 @@ app.post('/login', (req, res) => {
 
   try {
     if (!username || username.length === 0) {
-      return res.status(400).send('Invalid username');
+      return res.status(400).send('Invalid username ');
     }
     return res.status(200).send(`Welcome ${username}`);
   } catch (error) {

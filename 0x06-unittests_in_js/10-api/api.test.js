@@ -69,6 +69,18 @@ describe("POST /login", () => {
     );
   });
 
+  it('Returns the right message', (done) => {
+    const data = { userName: 'Guillaume' };
+    request.post('http://localhost:7865/login', {
+      json: {
+        username: 'BobDylan',
+      },
+    }, (error, response, body) => {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
+
   it("POST /login with missing username returns 400", (done) => {
     request.post(
       {
