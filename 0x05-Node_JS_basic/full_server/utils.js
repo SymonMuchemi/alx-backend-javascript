@@ -26,6 +26,7 @@ async function readDatabase(filepath) {
     return dataObj;
   } catch (error) {
     // console.log(error.message);
+    console.log('There is an error here!');
     throw new Error('Cannot load the database');
   }
 }

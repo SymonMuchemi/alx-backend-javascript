@@ -24,7 +24,8 @@ class StudentsController {
       }
       return response.status(200).send(message);
     } catch (error) {
-      // console.log(error.message);
+      console.log('An error occured here');
+      console.log(error.message);
       return response.status(500).send('Cannot load database');
     }
   }
