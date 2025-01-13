@@ -1,58 +1,32 @@
-import readDatabase from '../utils';
+const readDatabase = require('../utils');
 
 class StudentsController {
-  static async getAllStudents(request, response) {
-    try {
-      const argLen = process.argv.length;
-      const studentsData = await readDatabase(process.argv[argLen - 1]);
-
-      if (studentsData.length === 0) {
-        return response.status(500).send('Cannot load database: inside');
+  static getAllStudents(request, response) {
+    readDatabase(process.argv[2].toString()).then((students) => {
+      const output = [];
+      output.push('This is the list of our students');
+      const keys = Object.keys(students);
+      keys.sort();
+      for (let i = 0; i < keys.length; i += 1) {
+        output.push(`Number of students in ${keys[i]}: ${students[keys[i]].length}. List: ${students[keys[i]].join(', ')}`);
       }
-
-      let message = 'This is the list of students';
-
-      const fields = Object.keys(studentsData).sort((a, b) => a - b);
-
-      for (const field of fields) {
-        const list = studentsData[field];
-        // console.log(list);
-
-        message += `\nNumber of students in ${field}: ${
-          list.length
-        }. List: ${list.join(', ')}`;
-      }
-      return response.status(200).send(message);
-    } catch (error) {
-      console.log('An error occured here');
-      console.log(error.message);
-      return response.status(500).send('Cannot load database');
-    }
+      response.status(200).send(output.join('\n'));
+    }).catch(() => {
+      response.status(500).send('Cannot load the database');
+    });
   }
 
-  static async getAllStudentsByMajor(request, response) {
-    try {
-      const { major } = request.params;
-      const lastCommandLineArgumentIndex = process.argv.length - 1;
-      const studentsData = await readDatabase(
-        process.argv[lastCommandLineArgumentIndex],
-      );
-
-      if (studentsData.length === 0) {
-        return response.status(500).send('Cannot load database');
+  static getAllStudentsByMajor(request, response) {
+    const field = request.params.major;
+    readDatabase(process.argv[2].toString()).then((students) => {
+      if (!(field in students)) {
+        response.status(500).send('Major parameter must be CS or SWE');
+      } else {
+        response.status(200).send(`List: ${students[field].join(', ')}`);
       }
-
-      let message = '';
-
-      const field = Object.keys(studentsData).filter((f) => f === major);
-
-      const list = studentsData[field];
-      message += `List: ${list.join(', ')}`;
-
-      return response.status(200).send(message);
-    } catch (error) {
-      return response.status(500).send('Cannot load database');
-    }
+    }).catch(() => {
+      response.status(500).send('Cannot load the database');
+    });
   }
 }
 

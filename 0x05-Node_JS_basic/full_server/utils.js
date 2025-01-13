@@ -1,34 +1,26 @@
-const fs = require('fs').promises;
+const { readFile } = require('fs');
 
-async function readDatabase(filepath) {
-  try {
-    const data = await fs.readFile(filepath, 'utf-8');
-
-    const arr = data.split('\n');
-
-    arr.shift();
-    arr.pop();
-
-    // get fields
-    const fields = arr.map(((e) => e.split(',')[3]));
-    const uniqueFields = new Set(fields);
-    const fieldArr = [...uniqueFields];
-
-    const dataObj = {};
-
-    for (const field of fieldArr) {
-      const lst = arr.filter(((e) => e.split(',')[3] === field));
-      const names = lst.map(((e) => e.split(',')[0]));
-
-      dataObj[field] = names;
-    }
-
-    return dataObj;
-  } catch (error) {
-    // console.log(error.message);
-    console.log('There is an error here!');
-    throw new Error('Cannot load the database');
-  }
-}
-
-module.exports = readDatabase;
+module.exports = function readDatabase(filePath) {
+  const students = {};
+  return new Promise((resolve, reject) => {
+    readFile(filePath, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        const lines = data.toString().split('\n');
+        const noHeader = lines.slice(1);
+        for (let i = 0; i < noHeader.length; i += 1) {
+          if (noHeader[i]) {
+            const field = noHeader[i].toString().split(',');
+            if (Object.prototype.hasOwnProperty.call(students, field[3])) {
+              students[field[3]].push(field[0]);
+            } else {
+              students[field[3]] = [field[0]];
+            }
+          }
+        }
+        resolve(students);
+      }
+    });
+  });
+};
